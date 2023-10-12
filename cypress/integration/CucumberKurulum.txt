@@ -1,0 +1,47 @@
+Cypress 9.7.0'i kurduk
+npm i cypress@9.7.0
+
+1)https://www.npmjs.com/package/cypress-cucumber-preprocessor
+
+2)npm install --save-dev cypress-cucumber-preprocessor
+
+3)plugins/index.js dosyasini ekle
+
+const cucumber = require('cypress-cucumber-preprocessor').default
+
+module.exports = (on, config) => {
+  on('file:preprocessor', cucumber())
+}
+
+4)cypress.json dosyasini ekle
+
+{
+       "testFiles": "**/*.feature"
+}
+5) package.json dosyasina
+
+"cypress-cucumber-preprocessor": {
+  "nonGlobalStepDefinitions": true
+}
+6) stepdefinition dosyalarinin basina eklenir
+ import { Given, And, Then, When } from "cypress-cucumber-preprocessor/steps";
+
+
+NOT: feature file dosya ismi ile step definition klasorunun ismi
+ ayni olmak zorunda
+
+ TESTLERİ CALIŞTIRMA
+
+./node_modules/.bin/cypress run
+
+./node_modules/.bin/cypress-tags run -e TAGS='@User_id1'
+ Tag'i  @User_id1 olan testi çalıştır
+
+ ./node_modules/.bin/cypress-tags run -e TAGS='@smoke'
+  Tag'i '@smoke' olan testi çalıştır
+
+  ./node_modules/.bin/cypress-tags run -e TAGS='not ./node_modules/.bin/cypress-tags run -e TAGS='@User_id1'
+   Tag'ı @User_id1 olanlar hariç hepsini çalıştır
+
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+   windowslarda hata alirsak yukaridaki kodu calistiralim!!!!
